@@ -39,7 +39,7 @@ describe Beaker::Dispatcher do
 
 
           expect(Beaker.application).to receive(:controller?).and_return(false)
-          expect(Beaker.application).not_to receive(:controller).and_return(controller)
+          expect(Beaker.application).not_to receive(:controller)
 
           expect(Beaker::BertSocketHelper).to receive(:write_no_module_error).with(socket, :useers)
 
