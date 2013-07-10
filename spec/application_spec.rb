@@ -26,6 +26,8 @@ describe Beaker::Application do
 
   it "loads rake tasks" do
     expect(Beaker.application).to receive(:load).with("beaker/tasks/server.rake").and_return(true)
+    expect(Beaker.application).to receive(:load).with("beaker/tasks/console.rake").and_return(true)
+
     Beaker.application.load_rake_tasks
   end
 end

@@ -64,8 +64,13 @@ module Beaker
       sleep
     end
 
+    def console!
+      binding.pry
+    end
+
     def load_rake_tasks
       load "beaker/tasks/server.rake"
+      load "beaker/tasks/console.rake"
     end
 
     # TODO
