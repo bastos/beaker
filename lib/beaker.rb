@@ -65,7 +65,7 @@ module Beaker
     end
 
     def console!
-      binding.pry
+      Pry.start
     end
 
     def load_rake_tasks
