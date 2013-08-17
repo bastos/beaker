@@ -2,11 +2,12 @@ module Beaker
   class Application
     include Yell::Loggable
 
-    attr_accessor :controllers, :root_path, :environment
+    attr_accessor :controllers, :root_path, :environment, :port
 
-    def initialize(path, env)
+    def initialize(path, env, port)
       self.root_path = path
       self.environment = env
+      self.port = port || 9999
       self.controllers = {}
       initialize_logger
     end
@@ -26,7 +27,7 @@ module Beaker
     end
 
     def run!
-      supervisor = Server.supervise("127.0.0.1", 9999)
+      supervisor = Server.supervise("127.0.0.1", port)
       trap("INT") { supervisor.terminate; exit }
       trap("TERM") { supervisor.terminate; exit }
       sleep

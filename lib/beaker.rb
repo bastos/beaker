@@ -25,7 +25,7 @@ module Beaker
     end
 
     def boot(options, &block)
-      self.shared_application = Application.new(options[:path], options[:env])
+      self.shared_application = Application.new(options[:path], options[:env], options[:port])
       block.call(self.application)
     end
   end
