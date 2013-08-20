@@ -14,12 +14,14 @@ module Beaker
 
     def handle_connection(socket)
       _, port, host = socket.peeraddr
-      application = Beaker.application
-      application.logger.info "Received connection from #{host}:#{port}"
-      dispatcher = Dispatcher.new(socket, application)
-      dispatcher.dispatch!
-     rescue EOFError
-      application.logger.info "#{host}:#{port} disconnected"
+      loop do
+        application = Beaker.application
+        application.logger.info "Received connection from #{host}:#{port}"
+        dispatcher = Dispatcher.new(socket, application)
+        dispatcher.dispatch!
+      end
+    rescue EOFError
+      # application.logger.info "#{host}:#{port} disconnected"
       socket.close
     end
 
