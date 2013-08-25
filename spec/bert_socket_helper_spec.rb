@@ -16,7 +16,6 @@ describe Beaker::BertSocketHelper do
         expect(BERT).to receive(:encode).with(t[:reply, reply]).and_return(encoded_reply)
         expect(socket).to receive(:write).with(packed_data_size)
         expect(socket).to receive(:write).with(encoded_reply)
-        expect(socket).to receive(:close)
         Beaker::BertSocketHelper.write_reply(socket, reply)
       end
     end
@@ -29,7 +28,6 @@ describe Beaker::BertSocketHelper do
         expect(BERT).to receive(:encode).with(t[:noreply]).and_return(encoded_noreply)
         expect(socket).to receive(:write).with(packed_data_size)
         expect(socket).to receive(:write).with(encoded_noreply)
-        expect(socket).to receive(:close)
         Beaker::BertSocketHelper.write_noreply(socket)
       end
     end
@@ -42,7 +40,6 @@ describe Beaker::BertSocketHelper do
         expect(BERT).to receive(:encode).with([:error, [:server, 2, "Beaker", "function method not found on module module", []]]).and_return(encoded_error)
         expect(socket).to receive(:write).with(packed_data_size)
         expect(socket).to receive(:write).with(encoded_error)
-        expect(socket).to receive(:close)
         Beaker::BertSocketHelper.write_no_method_error(socket, :method, :module)
       end
     end
@@ -55,7 +52,6 @@ describe Beaker::BertSocketHelper do
         expect(BERT).to receive(:encode).with([:error, [:server, 1, "Beaker", "Module module not found", []]]).and_return(encoded_error)
         expect(socket).to receive(:write).with(packed_data_size)
         expect(socket).to receive(:write).with(encoded_error)
-        expect(socket).to receive(:close)
         Beaker::BertSocketHelper.write_no_module_error(socket, :module)
       end
     end
@@ -68,7 +64,6 @@ describe Beaker::BertSocketHelper do
         expect(BERT).to receive(:encode).and_return(encoded_error)
         expect(socket).to receive(:write).with(packed_data_size)
         expect(socket).to receive(:write).with(encoded_error)
-        expect(socket).to receive(:close)
         Beaker::BertSocketHelper.write_noreply(socket)
       end
     end
