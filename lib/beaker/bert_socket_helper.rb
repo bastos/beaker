@@ -32,7 +32,6 @@ module Beaker
       def write(socket, send_data)
         socket.write([send_data.length].pack("N"))
         socket.write(send_data)
-        socket.close
       end
     end
   end
