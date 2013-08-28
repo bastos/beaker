@@ -26,6 +26,10 @@ class TestController
   def test(a, b)
     a + b
   end
+
+  def exception_test(a, b)
+    raise Exception
+  end
 end
 
 class UsersController
