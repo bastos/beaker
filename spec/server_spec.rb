@@ -20,5 +20,16 @@ describe Beaker::Server do
         expect(result).to eq("1")
       end
     end
+
+    it "handles any exceptions" do
+      with_tcp_server do |server|
+        svc = BERTRPC::Service.new(example_addr, example_port)
+        Beaker::Server.any_instance.should_receive(:handle_exception!) do |options|
+          options[:socket].close
+        end
+
+        expect { svc.call.test.exception_test(1, 2) }.to raise_error
+      end
+    end
   end
 end
